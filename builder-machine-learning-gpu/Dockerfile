@@ -1,5 +1,16 @@
 FROM gcr.io/jenkinsxio/builder-base:0.0.44
 
+# Latest Git large file store support
+RUN mkdir git-lfs && \
+curl "https://api.github.com/repos/git-lfs/git-lfs/releases/latest" | \
+    grep '"tag_name":' | \
+    sed -E 's/.*"([^"]+)".*/\1/' | \
+    xargs -I {} curl -fL 'https://github.com/git-lfs/git-lfs/releases/download/'{}'/git-lfs-linux-amd64-'{}'.tar.gz' | tar xzvC git-lfs && \
+git-lfs/install.sh && \
+rm -rf git-lfs
+
+RUN mkdir -p /usr/src/app
+
 # CUDA 10.0
 RUN echo $'[cudarepo]\n\
 name=Cuda Repository\n\
@@ -10,10 +21,9 @@ gpgkey=https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/7fa
 >/etc/yum.repos.d/cuda.repo
 
 RUN yum clean all && \
-yum -y install cuda-toolkit-10-0
-
-RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
-    echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
+yum -y install cuda-toolkit-10-0 && \
+echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
+echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
 ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
@@ -30,26 +40,15 @@ sh ./anaconda.sh -b && \
 eval "$(/root/anaconda3/bin/conda shell.bash hook)" && \
 conda init && \
 conda install -c conda-forge -c pytorch onnx=1.5.0 flake8=3.7.7 hypothesis=4.10.0 pytorch=1.1.0 -y && \
-rm anaconda.sh
+rm anaconda.sh && \
+cp /root/.bash_profile /etc/profile.d/bash_profile.sh
 
-# Latest Git large file store support
-RUN mkdir git-lfs && \
-curl "https://api.github.com/repos/git-lfs/git-lfs/releases/latest" | \
-    grep '"tag_name":' | \
-    sed -E 's/.*"([^"]+)".*/\1/' | \
-    xargs -I {} curl -fL 'https://github.com/git-lfs/git-lfs/releases/download/'{}'/git-lfs-linux-amd64-'{}'.tar.gz' | tar xzvC git-lfs && \
-git-lfs/install.sh && \
-rm -rf git-lfs
+# work around circular error
+RUN rm /etc/profile.d/bash_profile.sh
 
 # jx
 ENV JX_VERSION 2.0.468
 RUN curl -f -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
-
-RUN cp /root/.bash_profile /etc/profile.d/bash_profile.sh
-RUN mkdir -p /usr/src/app
-
-# work around circular error
-RUN rm /etc/profile.d/bash_profile.sh
 
 CMD ["conda", "--version"]
