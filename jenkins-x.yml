@@ -7,11 +7,11 @@ pipelineConfig:
           containerOptions:
             resources:
               limits:
-                memory: 10Gi
+                memory: 24Gi
               requests:
-                memory: 2Gi
+                memory: 16Gi
         agent:
-          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+          image: gcr.io/kaniko-project/executor:v0.10.0
         stages:
           - name: build-and-push
             environment:
@@ -74,11 +74,11 @@ pipelineConfig:
           containerOptions:
             resources:
               limits:
-                memory: 10Gi
+                memory: 24Gi
               requests:
-                memory: 2Gi
+                memory: 16Gi
         agent:
-          image: gcr.io/kaniko-project/executor:9912ccbf8d22bbafbf971124600fbb0b13b9cbd6
+          image: gcr.io/kaniko-project/executor:v0.10.0
         stages:
           - name: build-base
             environment:
@@ -113,9 +113,7 @@ pipelineConfig:
               command: /kaniko/warmer
               args:
                 - --cache-dir=/workspace
-                - --image=gcr.io/jenkinsxio/builder-swiftbase:0.0.44
                 - --image=gcr.io/jenkinsxio/builder-base:0.0.44
-                - --image=gcr.io/jenkinsxio/builder-rubybase:0.0.44
 
             # builders
             - name: build-and-push-machine-learning
