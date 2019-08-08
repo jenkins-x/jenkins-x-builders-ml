@@ -1,0 +1,128 @@
+Step: build-step-credential-initializer-rbz8z:
+
+Unable to retrieve container logs for docker://b7fc43eb5f646a133807f4f7ffded844a856fecb3cf9605ba7bad7da1de6bc5d
+Step: build-step-working-dir-initializer-jkwv8:
+
+Unable to retrieve container logs for docker://46cc8075ba40b47666faa54113151068f736c2bf2eacc2783dd654626c358c73
+Step: build-step-place-tools:
+
+Unable to retrieve container logs for docker://c57632c94d870a151f1032d5a0cd2c17815571390054fb08374e7ea8454dab7f
+Step: build-step-git-source-jenkins-x-jenkins-x-builders-ml-p9bbv:
+
+{"level":"warn","ts":1565224221.7009323,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/master\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1565224223.2727702,"logger":"fallback-logger","caller":"git/git.go:102","msg":"Successfully cloned https://github.com/jenkins-x/jenkins-x-builders-ml @ 41d1602a3286d3de28defc1f38ed6fff302e0780 in path /workspace/source"}
+Step: build-step-git-merge:
+
+Warning failed to load version: failed to parse version -dev+9e73adc0b: No Major.Minor.Patch elements found
+time="2019-08-08T00:30:24Z" level=info msg="got "
+Using SHAs from PULL_REFS=master:bcbd13f6c3fc09cd21305a8bafb623cb80ccf995,34:41d1602a3286d3de28defc1f38ed6fff302e0780
+ran git fetch --unshallow origin 41d1602a3286d3de28defc1f38ed6fff302e0780: bcbd13f6c3fc09cd21305a8bafb623cb80ccf995: in 
+ran git checkout master in 
+ran git reset --hard bcbd13f6c3fc09cd21305a8bafb623cb80ccf995 in 
+ran clean --force -d . in 
+ran git merge 41d1602a3286d3de28defc1f38ed6fff302e0780 in 
+Step: build-step-step2:
+
+/builder/home/kaniko-secret.json
+Step: build-step-warm-cache:
+
+Step: build-step-build-and-push-machine-learning:
+
+[36mINFO[0m[0000] Resolved base name gcr.io/jenkinsxio/builder-base:0.0.44 to gcr.io/jenkinsxio/builder-base:0.0.44 
+[36mINFO[0m[0000] Resolved base name gcr.io/jenkinsxio/builder-base:0.0.44 to gcr.io/jenkinsxio/builder-base:0.0.44 
+[36mINFO[0m[0000] Downloading base image gcr.io/jenkinsxio/builder-base:0.0.44 
+[36mINFO[0m[0001] Found sha256:f889e888c351a595832da82ebbc375d22984bab79073185de16affdfcef40f73 in local cache 
+[36mINFO[0m[0001] Found manifest at /workspace/sha256:f889e888c351a595832da82ebbc375d22984bab79073185de16affdfcef40f73.json 
+[36mINFO[0m[0001] Built cross stage deps: map[]                
+[36mINFO[0m[0001] Downloading base image gcr.io/jenkinsxio/builder-base:0.0.44 
+[36mINFO[0m[0001] Found sha256:f889e888c351a595832da82ebbc375d22984bab79073185de16affdfcef40f73 in local cache 
+[36mINFO[0m[0001] Found manifest at /workspace/sha256:f889e888c351a595832da82ebbc375d22984bab79073185de16affdfcef40f73.json 
+[36mINFO[0m[0001] Checking for cached layer gcr.io/jenkinsxio/cache:be3cfe94fb272488aeb4220e009b4d5b8ee52676fd056eab0b5a5a24b57c5329... 
+[36mINFO[0m[0002] Using caching version of cmd: RUN curl -fLo anaconda.sh https://repo.anaconda.com/archive/Anaconda${ANACONDAVERSION}-Linux-x86_64.sh && sh ./anaconda.sh -b && eval "$(/root/anaconda3/bin/conda shell.bash hook)" && conda init && conda install -c conda-forge -c pytorch onnx=1.4.1 flake8=3.7.7 hypothesis=4.10.0 pytorch=1.0.1 -y && rm anaconda.sh 
+[36mINFO[0m[0002] Checking for cached layer gcr.io/jenkinsxio/cache:1151c0a402d63d5798732644b12728dabda842f69c8d6772f9dd4761a6eeb27e... 
+[36mINFO[0m[0002] Using caching version of cmd: RUN mkdir git-lfs && curl "https://api.github.com/repos/git-lfs/git-lfs/releases/latest" |     grep '"tag_name":' |     sed -E 's/.*"([^"]+)".*/\1/' |     xargs -I {} curl -fL 'https://github.com/git-lfs/git-lfs/releases/download/'{}'/git-lfs-linux-amd64-'{}'.tar.gz' | tar xzvC git-lfs && git-lfs/install.sh && rm -rf git-lfs 
+[36mINFO[0m[0002] Checking for cached layer gcr.io/jenkinsxio/cache:03c28e4636439b35687d1fe4d3aff7a8a07317e02d4359a38a6158316c9aea15... 
+[36mINFO[0m[0003] No cached layer found for cmd RUN curl -f -L https://github.com/jenkins-x/**/releases/download/v${JX_VERSION}/**-linux-amd64.tar.gz | tar xzv &&   mv ** /usr/bin/ 
+[36mINFO[0m[0003] Unpacking rootfs as cmd RUN curl -f -L https://github.com/jenkins-x/**/releases/download/v${JX_VERSION}/**-linux-amd64.tar.gz | tar xzv &&   mv ** /usr/bin/ requires it. 
+[36mINFO[0m[0110] Taking snapshot of full filesystem...        
+[36mINFO[0m[0197] ENV ANACONDAVERSION 3-2019.03                
+[36mINFO[0m[0197] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0197] RUN curl -fLo anaconda.sh https://repo.anaconda.com/archive/Anaconda${ANACONDAVERSION}-Linux-x86_64.sh && sh ./anaconda.sh -b && eval "$(/root/anaconda3/bin/conda shell.bash hook)" && conda init && conda install -c conda-forge -c pytorch onnx=1.4.1 flake8=3.7.7 hypothesis=4.10.0 pytorch=1.0.1 -y && rm anaconda.sh 
+[36mINFO[0m[0197] Found cached layer, extracting to filesystem 
+[36mINFO[0m[0472] Taking snapshot of files...                  
+[36mINFO[0m[0648] RUN mkdir git-lfs && curl "https://api.github.com/repos/git-lfs/git-lfs/releases/latest" |     grep '"tag_name":' |     sed -E 's/.*"([^"]+)".*/\1/' |     xargs -I {} curl -fL 'https://github.com/git-lfs/git-lfs/releases/download/'{}'/git-lfs-linux-amd64-'{}'.tar.gz' | tar xzvC git-lfs && git-lfs/install.sh && rm -rf git-lfs 
+[36mINFO[0m[0648] Found cached layer, extracting to filesystem 
+[36mINFO[0m[0649] Taking snapshot of files...                  
+[36mINFO[0m[0649] ENV JX_VERSION 2.0.569                       
+[36mINFO[0m[0649] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0649] RUN curl -f -L https://github.com/jenkins-x/**/releases/download/v${JX_VERSION}/**-linux-amd64.tar.gz | tar xzv &&   mv ** /usr/bin/ 
+[36mINFO[0m[0649] cmd: /bin/sh                                 
+[36mINFO[0m[0649] args: [-c curl -f -L https://github.com/jenkins-x/**/releases/download/v${JX_VERSION}/**-linux-amd64.tar.gz | tar xzv &&   mv ** /usr/bin/] 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   612    0   612    0     0   1834      0 --:--:-- --:--:-- --:--:--  1832
+LICENSE
+README.md
+changelog.md
+**
+  2 65.6M    2 1910k    0     0  1536k      0  0:00:43  0:00:01  0:00:42 1536k 43 65.6M   43 28.6M    0     0  12.7M      0  0:00:05  0:00:02  0:00:03 26.8M 91 65.6M   91 60.1M    0     0  18.4M      0  0:00:03  0:00:03 --:--:-- 28.9M100 65.6M  100 65.6M    0     0  17.4M      0  0:00:03  0:00:03 --:--:-- 25.2M
+[36mINFO[0m[0653] Taking snapshot of full filesystem...        
+[36mINFO[0m[0719] RUN cp /root/.bash_profile /etc/profile.d/bash_profile.sh 
+[36mINFO[0m[0719] cmd: /bin/sh                                 
+[36mINFO[0m[0719] args: [-c cp /root/.bash_profile /etc/profile.d/bash_profile.sh] 
+[36mINFO[0m[0719] Pushing layer gcr.io/jenkinsxio/cache:03c28e4636439b35687d1fe4d3aff7a8a07317e02d4359a38a6158316c9aea15 to cache now 
+[36mINFO[0m[0719] Taking snapshot of full filesystem...        
+2019/08/08 00:42:55 pushed blob: sha256:4ade6a20e5d8343f89b3ad3eeb4ff3ba030b910d4eb49e6b48e992fb745e9bce
+2019/08/08 00:43:04 pushed blob: sha256:5d63431846cd40f2c1ff35daec482521b6330da1d46a0349b66cac16c716bcc8
+2019/08/08 00:43:05 gcr.io/jenkinsxio/cache:03c28e4636439b35687d1fe4d3aff7a8a07317e02d4359a38a6158316c9aea15: digest: sha256:1d366f0cc84c37f36ceee3f63ccf162a9e1bdef9d74a86dc5098d04362e72ead size: 429
+[36mINFO[0m[0777] RUN mkdir -p /usr/src/app                    
+[36mINFO[0m[0777] cmd: /bin/sh                                 
+[36mINFO[0m[0777] args: [-c mkdir -p /usr/src/app]             
+[36mINFO[0m[0777] Pushing layer gcr.io/jenkinsxio/cache:d1f91ba9f9b77aafd43b7b5c1479b63e2f9b65bec230c4e9a222d89ebbf3e5ed to cache now 
+[36mINFO[0m[0777] Taking snapshot of full filesystem...        
+2019/08/08 00:43:54 pushed blob: sha256:f902c52a933f3d9a86a3ea3e3ee8805987236ee0a0b971927e7d438ada663197
+2019/08/08 00:43:54 pushed blob: sha256:4091a0b2e13d98334db4ff7f21aa4f0f5a70c59970e477ff8aa74f388c7edfc2
+2019/08/08 00:43:55 gcr.io/jenkinsxio/cache:d1f91ba9f9b77aafd43b7b5c1479b63e2f9b65bec230c4e9a222d89ebbf3e5ed: digest: sha256:49c4f710a24b9bccba61119a66eb06cbdc261d954369dc3106cc28454a485780 size: 424
+[36mINFO[0m[0836] CMD ["conda", "--version"]                   
+[36mINFO[0m[0836] No files changed in this command, skipping snapshotting. 
+[36mINFO[0m[0836] Pushing layer gcr.io/jenkinsxio/cache:f7ae95a08f3de6fa1a2a1649a1b3bb54b9372f7b34e937fee8ed1706e16a28b7 to cache now 
+2019/08/08 00:44:52 pushed blob: sha256:8c116c357b938e279a6631f054aa1c4b71e8847ee42c2085cae1df0fe8690ed8
+2019/08/08 00:44:52 pushed blob: sha256:7090e4a6d3b783b95e8193c9aa07a288cecedaa1b0b9e079792b06a44cd39dc6
+2019/08/08 00:44:53 gcr.io/jenkinsxio/cache:f7ae95a08f3de6fa1a2a1649a1b3bb54b9372f7b34e937fee8ed1706e16a28b7: digest: sha256:dbbb524615f26fa6bf49fbb56ac4bb6b72f182b61cf4d17ec0ca59c65b3f50a6 size: 424
+2019/08/08 00:44:54 existing blob: sha256:429b38434357f169ce8a79a4bb39ca386ccf658ae7482b6ff602a86e6191960e
+2019/08/08 00:44:54 existing blob: sha256:d773df446b2002f5750748d96b7929546effb66991006aa6fb556a70823be462
+2019/08/08 00:44:54 existing blob: sha256:05ee8f48257315be25616db5b2ef5381d577bdee423068b8408404125b64fde4
+2019/08/08 00:44:54 existing blob: sha256:94b3b7648b5544a05178b5994d088a23b3b253f02d4aa676b986f9e7fb36a10e
+2019/08/08 00:44:54 existing blob: sha256:f9443307d73a890bbffbe23bbf8ce9a8e5e6d99b3a206bbd1959c80ea2cea61f
+2019/08/08 00:44:54 existing blob: sha256:b1587e65165c461940963893326da19b2bc15471f6191bfdd9194758cb886aa6
+2019/08/08 00:44:54 existing blob: sha256:6756e87e029cdeb551ccf519eaebcf80e3441dd2bb37ed39b7c2268b4774b10b
+2019/08/08 00:44:54 existing blob: sha256:8ba884070f611d31cb2c42eddb691319dc9facf5e0ec67672fcfa135181ab3df
+2019/08/08 00:44:54 existing blob: sha256:5069d699406c01c82af4f4e6147348dc551cb5d39e0d20dd1750bdce5b49c585
+2019/08/08 00:44:54 existing blob: sha256:f49b7820967adb88e448f3c2a00267d9ea953eabbd3a81db6b7906a4920623b4
+2019/08/08 00:44:54 existing blob: sha256:bee0a13648017886c5915ce5dec608f24dbea7b8a1e044c8fb2105ceea408afa
+2019/08/08 00:44:54 existing blob: sha256:5470abb626135f17b82fe46ee94962781a8aba7069a4c0b1898182daa4f429e3
+2019/08/08 00:44:54 existing blob: sha256:f25494c611ea091e11b157eb61a293f87abd08ed88d620a7c339749a5df70962
+2019/08/08 00:44:54 existing blob: sha256:8c116c357b938e279a6631f054aa1c4b71e8847ee42c2085cae1df0fe8690ed8
+2019/08/08 00:44:54 existing blob: sha256:6d138d81df365a45ab5fcf8e3f3da8357c45afe495207ecd09d2af0eb98505c5
+2019/08/08 00:44:54 existing blob: sha256:f92a8369d697ee4bd7673d9254752c241eecc4a23096bbb32f3034d11811b5a1
+2019/08/08 00:44:54 existing blob: sha256:b6fba42ef133eece995deb10c314cf8baa51ec1bd7dbea9ab259a5d79dcdfda1
+2019/08/08 00:44:54 existing blob: sha256:7ec2ffb56c90d8cad824dd30eeb4abbbc7321596c47a7dca90095935c3c2b656
+2019/08/08 00:44:54 existing blob: sha256:d8c575b2b52888c9ee09cee8dba37cd3b3035555769295d514229d43fbf47d8e
+2019/08/08 00:44:54 existing blob: sha256:a8354d42e6911ab8001edfffa1934a1a9b357d1541f5cecc792b9a4172d76f46
+2019/08/08 00:44:54 existing blob: sha256:7f205009ed1da43f1f35b5edc07400e345ce6c01cb46e1ae41365386e9434c45
+2019/08/08 00:44:54 existing blob: sha256:92ade984df77a2da628fb1374cdf03f767152d12cd5df74465e4bc8bb39edb58
+2019/08/08 00:44:54 existing blob: sha256:e5e2dacee7b09f7927bbd054ec3859e5555a27d569da5193f4cabac285053f9b
+2019/08/08 00:44:54 existing blob: sha256:ce53723240799b4450ccf6661e55e7277a52d14666b060a129af4125a69ac70e
+2019/08/08 00:44:54 existing blob: sha256:2cde0a33cb63aa41a1ab3fbdc3afc787a086314a625c30f7b68bc7ac02c6660e
+2019/08/08 00:44:54 existing blob: sha256:065e519718393bdd264839cafc4d57eb600832a903765af6d41af5819dd4d160
+2019/08/08 00:44:54 existing blob: sha256:7c017636a6a609d8d318a4bebb3b6cc13feaf476f6a2ecc83d28e117314d5f6f
+2019/08/08 00:44:54 existing blob: sha256:897e54f35a4b2ed07f22d316f09a9aa9ea68765f226654989a175bb51361e86e
+2019/08/08 00:44:54 existing blob: sha256:4091a0b2e13d98334db4ff7f21aa4f0f5a70c59970e477ff8aa74f388c7edfc2
+2019/08/08 00:44:54 existing blob: sha256:beeb2bddff350965322c530827ce314058a5af7f4f628d9ef9c97dd73e48d016
+2019/08/08 00:44:54 existing blob: sha256:5d63431846cd40f2c1ff35daec482521b6330da1d46a0349b66cac16c716bcc8
+2019/08/08 00:44:54 existing blob: sha256:b1c1d1dc3c9b9ab62839f55f0b0da8856c9afa9d6fd1df987a48f582cc28183c
+2019/08/08 00:44:54 existing blob: sha256:d1f08e18f79c532c470770e5fb7824e610deebfdcfe3775f6a1ad385b65e5e95
+2019/08/08 00:44:56 pushed blob: sha256:0c1d4a303297fc9f0b50e0fa03e6ab9f071426b3b5bce5934c42fea88996f741
+2019/08/08 00:44:57 pushed blob: sha256:7788a4803dbc38503304b2721b5831c30e437679bcbee69c5fbdf003bf930ee1
+2019/08/08 00:50:12 pushed blob: sha256:2fcca177d30caf492263dc18955af9784e8a360485b75497642942f24beecbd7
+2019/08/08 00:50:14 gcr.io/jenkinsxio/builder-machine-learning:0.0.0-SNAPSHOT-PR-34-53: digest: sha256:74f2bbb47d20d9492f36df7a30a755d39154fc1f01eb9277823b9e9f1301a041 size: 6009
