@@ -48,7 +48,7 @@ pipelineConfig:
                   command: /kaniko/warmer
                   args:
                     - --cache-dir=/workspace
-                    - --image=gcr.io/jenkinsxio/builder-base:0.0.44
+                    - --image=gcr.io/jenkinsxio/builder-base:0.0.63
 
                 # builders
                 - name: build-and-push-machine-learning
@@ -80,7 +80,7 @@ pipelineConfig:
                     command: /kaniko/warmer
                     args:
                       - --cache-dir=/workspace
-                      - --image=gcr.io/jenkinsxio/builder-base:0.0.44
+                      - --image=gcr.io/jenkinsxio/builder-base:0.0.63
 
                   # builders
                   - name: build-and-push-machine-learning-gpu
@@ -138,7 +138,7 @@ pipelineConfig:
               command: /kaniko/warmer
               args:
                 - --cache-dir=/workspace
-                - --image=gcr.io/jenkinsxio/builder-base:0.0.44
+                - --image=gcr.io/jenkinsxio/builder-base:0.0.63
 
             # builders
             - name: build-and-push-machine-learning
@@ -162,10 +162,10 @@ pipelineConfig:
 
             # update downstream dependencies
             - name: update-bot
-              image: gcr.io/jenkinsxio/builder-maven:0.1.576
+              image: gcr.io/jenkinsxio/builder-maven:0.1.800
               command: ./update-bot.sh
 
             # Create the release notes
             - name: changelog
-              image: gcr.io/jenkinsxio/builder-go:0.1.576
+              image: gcr.io/jenkinsxio/builder-go:0.1.800
               command: ./changelog.sh
