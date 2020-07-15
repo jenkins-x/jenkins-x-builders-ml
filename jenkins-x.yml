@@ -55,7 +55,7 @@ pipelineConfig:
                   command: /kaniko/executor
                   args:
                     - --dockerfile=/workspace/source/builder-machine-learning/Dockerfile
-                    - --destination=gcr.io/jenkinsxio/builder-machine-learning:${inputs.params.version}
+                    - --destination=gcr.io/jenkinsxio/builder-machine-learning:$(inputs.params.version)
                     - --context=/workspace/source
                     - --cache-repo=gcr.io/jenkinsxio/cache
                     - --cache=true
@@ -87,7 +87,7 @@ pipelineConfig:
                     command: /kaniko/executor
                     args:
                       - --dockerfile=/workspace/source/builder-machine-learning-gpu/Dockerfile
-                      - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:${inputs.params.version}
+                      - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:$(inputs.params.version)
                       - --context=/workspace/source
                       - --cache-repo=gcr.io/jenkinsxio/cache
                       - --cache=true
@@ -145,7 +145,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-machine-learning/Dockerfile
-                - --destination=gcr.io/jenkinsxio/builder-machine-learning:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning:$(inputs.params.version)
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
@@ -154,7 +154,7 @@ pipelineConfig:
               command: /kaniko/executor
               args:
                 - --dockerfile=/workspace/source/builder-machine-learning-gpu/Dockerfile
-                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:${inputs.params.version}
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:$(inputs.params.version)
                 - --context=/workspace/source
                 - --cache-repo=gcr.io/jenkinsxio/cache
                 - --cache=true
