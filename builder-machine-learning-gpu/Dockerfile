@@ -29,7 +29,10 @@ RUN curl -fLo anaconda.sh https://repo.anaconda.com/archive/Anaconda${ANACONDAVE
 sh ./anaconda.sh -b && \
 eval "$(/root/anaconda3/bin/conda shell.bash hook)" && \
 conda init && \
-conda install -c conda-forge -c pytorch onnx=1.5.0 flake8=3.7.7 hypothesis=4.10.0 pytorch=1.1.0 -y && \
+conda install -c conda-forge flake8=3.7.7 -y && \
+conda install -c conda-forge onnx=1.5.0 -y && \
+conda install -c conda-forge hypothesis=4.10.0 -y && \
+conda install -c pytorch pytorch=1.1.0 -y && \
 rm anaconda.sh
 
 # Latest Git large file store support
@@ -42,7 +45,7 @@ git-lfs/install.sh && \
 rm -rf git-lfs
 
 # jx
-ENV JX_VERSION 2.1.127
+ENV JX_VERSION 2.1.138
 RUN curl -f -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
   mv jx /usr/bin/
 
