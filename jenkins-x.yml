@@ -3,83 +3,69 @@ pipelineConfig:
   pipelines:
     pullRequest:
       pipeline:
-        options:
-          containerOptions:
-            resources:
-              limits:
-                memory: 30Gi
-              requests:
-                memory: 30Gi
         agent:
           image: gcr.io/kaniko-project/executor
+        options:
+          volumes:
+            - name: kaniko-secret
+              secret:
+                secretName: kaniko-secret
+                items:
+                  - key: kaniko-secret
+                    path: kaniko/kaniko-secret.json
+          containerOptions:
+            volumeMounts:
+              - name: kaniko-secret
+                mountPath: /secrets
+            resources:
+              limits:
+                memory: 24Gi
+              requests:
+                memory: 24Gi
+        environment:
+          - name: PUSH_LATEST
+            value: "false"
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /secrets/kaniko/kaniko-secret.json
+          - name: GIT_COMMITTER_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_COMMITTER_NAME
+            value: jenkins-x-bot
+          - name: GIT_AUTHOR_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_NAME
+            value: jenkins-x-bot
         stages:
           - name: build-and-push
-            options:
-              volumes:
-                - name: kaniko-secret
-                  secret:
-                    secretName: kaniko-secret
-                    items:
-                      - key: kaniko-secret
-                        path: kaniko/kaniko-secret.json
-              containerOptions:
-                volumeMounts:
-                  - name: kaniko-secret
-                    mountPath: /secrets
-            environment:
-              - name: PUSH_LATEST
-                value: "false"
-              - name: GOOGLE_APPLICATION_CREDENTIALS
-                value: /secrets/kaniko/kaniko-secret.json
-              - name: GIT_COMMITTER_EMAIL
-                value: jenkins-x@googlegroups.com
-              - name: GIT_COMMITTER_NAME
-                value: jenkins-x-bot
-              - name: GIT_AUTHOR_EMAIL
-                value: jenkins-x@googlegroups.com
-              - name: GIT_AUTHOR_NAME
-                value: jenkins-x-bot
-            parallel:
-              - name: ml
-                steps:
-                # cache base images
-                - name: warm-cache
-                  image: gcr.io/kaniko-project/warmer
-                  command: /kaniko/warmer
-                  args:
-                    - --cache-dir=/workspace
-                    - --image=gcr.io/jenkinsxio/builder-base:0.0.83
+            steps:
+            # cache base images
+            - name: warm-cache
+              image: gcr.io/kaniko-project/warmer
+              command: /kaniko/warmer
+              args:
+                - --cache-dir=/workspace
+                - --image=gcr.io/jenkinsxio/builder-base:0.0.83
 
-                # builders
-                - name: build-and-push-machine-learning
-                  command: /kaniko/executor
-                  args:
-                    - --dockerfile=/workspace/source/builder-machine-learning/Dockerfile
-                    - --destination=gcr.io/jenkinsxio/builder-machine-learning:$(inputs.params.version)
-                    - --context=/workspace/source
-                    - --cache-repo=gcr.io/jenkinsxio/cache
-                    - --cache=true
-                    - --cache-dir=/workspace
-              - name: mlgpu
-                steps:
-                  # cache base images
-                  - name: warm-cache
-                    image: gcr.io/kaniko-project/warmer
-                    command: /kaniko/warmer
-                    args:
-                      - --cache-dir=/workspace
-                      - --image=gcr.io/jenkinsxio/builder-base:0.0.83
-
-                  # builders
-                  - name: build-and-push-machine-learning-gpu
-                    command: /kaniko/executor
-                    args:
-                      - --dockerfile=/workspace/source/builder-machine-learning-gpu/Dockerfile
-                      - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:$(inputs.params.version)
-                      - --context=/workspace/source
-                      - --cache-repo=gcr.io/jenkinsxio/cache
-                      - --cache=true
-                      - --cache-dir=/workspace
+            # builders
+            - name: build-and-push-machine-learning
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-machine-learning/Dockerfile
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning:$(inputs.params.version)
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
+            # builders
+            - name: build-and-push-machine-learning-gpu
+              command: /kaniko/executor
+              args:
+                - --dockerfile=/workspace/source/builder-machine-learning-gpu/Dockerfile
+                - --destination=gcr.io/jenkinsxio/builder-machine-learning-gpu:$(inputs.params.version)
+                - --context=/workspace/source
+                - --cache-repo=gcr.io/jenkinsxio/cache
+                - --cache=true
+                - --cache-dir=/workspace
 
     release:
       pipeline:
@@ -87,9 +73,9 @@ pipelineConfig:
           containerOptions:
             resources:
               limits:
-                memory: 30Gi
+                memory: 24Gi
               requests:
-                memory: 30Gi
+                memory: 24Gi
         agent:
           image: gcr.io/kaniko-project/executor
         stages:
