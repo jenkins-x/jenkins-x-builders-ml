@@ -44,7 +44,7 @@ pipelineConfig:
               command: /kaniko/warmer
               args:
                 - --cache-dir=/workspace
-                - --image=gcr.io/jenkinsxio/builder-base:0.0.83
+                - --image=gcr.io/jenkinsxio/builder-base:0.0.86
 
             # builders
             - name: build-and-push-machine-learning
@@ -114,7 +114,7 @@ pipelineConfig:
               command: /kaniko/warmer
               args:
                 - --cache-dir=/workspace
-                - --image=gcr.io/jenkinsxio/builder-base:0.0.83
+                - --image=gcr.io/jenkinsxio/builder-base:0.0.86
 
             # builders
             - name: build-and-push-machine-learning
